@@ -5,10 +5,10 @@
 
 <body>
     <h1>
-    Hello!
+    A Plotting Test!
     </h1>
 
-    World.
+    GRB Afterglow Synchrotron Spectrum
 
     <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
@@ -19,12 +19,12 @@
         var nu = '&nu;'
         var numLabel = nu+'m'.sub()
         var nucLabel = nu+'c'.sub()
-        snuM = b.create('slider', [[5,11],[10,11],[-5,0,15]],
+        snuM = b.create('slider', [[5,18],[10,18],[-5,0,15]],
                                     {name:numLabel})
-        snuC = b.create('slider', [[5,10],[10,10],[-5,2,15]],
+        snuC = b.create('slider', [[5,17],[10,17],[-5,7,15]],
                                     {name:nucLabel})
-        sFp = b.create('slider', [[5,9],[10,9],[0,15,20]], {name:'F'+'P'.sub()})
-        sp = b.create('slider', [[5,8],[10,8],[2,2.2,3]], {name:'p'})
+        sFp = b.create('slider', [[5,16],[10,16],[0,15,20]], {name:'F'+'P'.sub()})
+        sp = b.create('slider', [[5,15],[10,15],[2,2.2,3]], {name:'p'})
         syncSpec = function(x) {
             nuM = snuM.Value()
             nuC = snuC.Value()
