@@ -16,19 +16,56 @@
                                         {boundingbox: [-5, 20, 15, 0],
                                         axis:true,
                                         showCopyright:false});
-        sa1 = b.create('slider', [[5,11],[10,11],[-5,0,15]])
-        sa2 = b.create('slider', [[5,10],[10,10],[-5,2,15]])
-        f = function(x) {
-            a1 = sa1.Value()
-            a2 = sa2.Value()
-            if(x < a1)
-                return 3*(x-a1) + 15;
-            if(x >= a1 && x < a2)
-                return 0.5*(x-a1) + 15;
-            if(x >= a2)
-                return -2*(x-a2)+16;
+        var nu = '&nu;'
+        var numLabel = nu+'m'.sub()
+        var nucLabel = nu+'c'.sub()
+        snuM = b.create('slider', [[5,11],[10,11],[-5,0,15]],
+                                    {name:numLabel})
+        snuC = b.create('slider', [[5,10],[10,10],[-5,2,15]],
+                                    {name:nucLabel})
+        sFp = b.create('slider', [[5,9],[10,9],[0,15,20]], {name:'F'+'P'.sub()})
+        sp = b.create('slider', [[5,8],[10,8],[2,2.2,3]], {name:'p'})
+        syncSpec = function(x) {
+            nuM = snuM.Value()
+            nuC = snuC.Value()
+            Fp = sFp.Value()
+            p = sp.Value()
+            if(nuM < nuC)
+            {
+                if(x < nuM)
+                    return (x-nuM)/3.0 + Fp;
+                if(x >= nuM && x < nuC)
+                    return 0.5*(1-p)*(x-nuM) + Fp;
+                if(x >= nuC)
+                    return -0.5*p*(x-nuC) + 0.5*(1-p)*(nuC-nuM) + Fp;
+            }
+            else
+            {
+                if(x < nuC)
+                    return (x-nuC)/3.0 + Fp;
+                if(x >= nuC && x < nuM)
+                    return -0.5*(x-nuC) + Fp;
+                if(x >= nuM)
+                    return -0.5*p*(x-nuM) - 0.5*(nuM-nuC) + Fp;
+            }
         }
-        b.create('functiongraph', [f])
+
+        numf = function(){return snuM.Value();}
+        nucf = function(){return snuC.Value();}
+        Fmf = function(){return syncSpec(snuM.Value());}
+        Fcf = function(){return syncSpec(snuC.Value());}
+
+        b.create('functiongraph', [syncSpec])
+        var liM = b.create('line', [[numf,0], [numf,Fmf]],
+                                    {name:numLabel,
+                                    straightFirst:false,
+                                    straightLast:false,
+                                    dash:2})
+        var liC = b.create('line', [[nucf,0], [nucf,Fcf]],
+                                    {name:nucLabel,
+                                    straightFirst:false,
+                                    straightLast:false,
+                                    dash:2})
     </script>
 
 </body>
