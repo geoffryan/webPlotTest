@@ -1,0 +1,34 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.3.5/jsxgraphcore.js" integrity="sha256-0gG63RkHI8t9swp9e9raaApMr+D4QvHyhQJZsX9Sswk=" crossorigin="anonymous" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.3.5/jsxgraph.css" integrity="sha256-8jfm69zHRYvOe02vaXGxiFgOKZmJI/rFScjTXnO3c+o=" crossorigin="anonymous" />
+</head>
+
+<body>
+    <h1>
+    Hello!
+    </h1>
+
+    World.
+
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+        var b = JXG.JSXGraph.initBoard('box', 
+                                        {boundingbox: [-5, 20, 15, 0],
+                                        axis:true,
+                                        showCopyright:false});
+        sa1 = b.create('slider', [[5,11],[10,11],[-5,0,15]])
+        sa2 = b.create('slider', [[5,10],[10,10],[-5,2,15]])
+        f = function(x) {
+            a1 = sa1.Value()
+            a2 = sa2.Value()
+            if(x < a1)
+                return 3*(x-a1) + 15;
+            if(x >= a1 && x < a2)
+                return 0.5*(x-a1) + 15;
+            if(x >= a2)
+                return -2*(x-a2)+16;
+        }
+        b.create('functiongraph', [f])
+    </script>
+
+</body>
