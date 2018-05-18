@@ -13,18 +13,27 @@
     <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
         var b = JXG.JSXGraph.initBoard('box', 
-                                        {boundingbox: [-5, 20, 15, 0],
-                                        axis:true,
-                                        showCopyright:false});
+                                        {boundingbox: [-2, 21, 21, -2],
+                                        axis:false,
+                                        showCopyright:false,
+                                        showNavigation:false,
+                                            pan: {enabled:false}});
         var nu = '&nu;'
+        var Fnu = 'F' + nu.sub()
+        b.create('axis', [[0, 0], [20,0]], {name:nu, withLabel:true,
+                                        label:{position:'bot', offset:[0,-30]}})
+        b.create('axis', [[0, 0], [0,20]], {name:Fnu, withLabel:true,
+                                        label:{position:'bot', offset:[-30,0]}})
+        JXG.Options.axis.ticks.label.highlight = false;
+        JXG.Options.axis.highlight = false;
         var numLabel = nu+'m'.sub()
         var nucLabel = nu+'c'.sub()
-        snuM = b.create('slider', [[5,18],[10,18],[-5,0,15]],
+        snuM = b.create('slider', [[10,18],[15,18],[0,6,20]],
                                     {name:numLabel})
-        snuC = b.create('slider', [[5,17],[10,17],[-5,7,15]],
+        snuC = b.create('slider', [[10,17],[15,17],[0,15,20]],
                                     {name:nucLabel})
-        sFp = b.create('slider', [[5,16],[10,16],[0,15,20]], {name:'F'+'P'.sub()})
-        sp = b.create('slider', [[5,15],[10,15],[2,2.2,3]], {name:'p'})
+        sFp = b.create('slider', [[10,16],[15,16],[0,15,20]], {name:'F'+'P'.sub()})
+        sp = b.create('slider', [[10,15],[15,15],[2,2.2,3]], {name:'p'})
         syncSpec = function(x) {
             nuM = snuM.Value()
             nuC = snuC.Value()
